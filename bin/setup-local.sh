@@ -9,4 +9,4 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 ln -s envs/local/*
-ln -s env/local/.env
+ln -s envs/local/.env
