@@ -1,0 +1,26 @@
+wheel
+envparse==0.2.0
+django<4
+jinja2
+django-constance[database]==2.8.0
+requests<=3
+
+tenacity==6.3.1
+celery==5.0.5
+redis==3.5.3
+django-admin-honeypot<2
+django-probes==1.6.0
+
+# installed by alpine-packages
+# psycopg2-binary
+# pandas
+
+ipdb
+jedi<0.18  # 0.18 is broken
+pydocstyle
+mypy
+django-stubs
+flake8
+pytest
+pytest-django
+nox
