@@ -6,7 +6,7 @@ WORKDIR /home
 
 RUN apk add python3 python3-dev py3-pip musl-dev gcc git py3-gunicorn
 
-COPY alpine-packages.txt /tmp/
+COPY envs/prod/alpine-packages.txt /tmp/
 RUN cat /tmp/alpine-packages.txt | xargs apk add
 
 COPY requirements.txt /tmp/
