@@ -37,7 +37,6 @@ services:
 
   celery-worker:
     image: app
-    init: true
     env_file: .env
     environment:
       - DEBUG=off
@@ -49,7 +48,6 @@ services:
 
   celery-beat:
     image: app
-    init: true
     env_file: .env
     environment:
       - DEBUG=off
@@ -67,7 +65,6 @@ services:
     image: app
     healthcheck:
       test: wget -q 0.0.0.0:80
-    init: true
     env_file: .env
     environment:
       - DEBUG=off
