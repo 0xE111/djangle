@@ -6,7 +6,7 @@ cd $ROOT
 python -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt -r requirements-local.txt
+pip install -r requirements.txt -r envs/local/requirements.txt
 
 ln -s envs/local/docker-compose.yml
-ln -s envs/local/.env
+cp envs/local/.env .env

@@ -1,2 +1,2 @@
 pandas
-psycopg2-bin
+psycopg2-binary
