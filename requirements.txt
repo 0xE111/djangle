@@ -11,6 +11,7 @@ flower
 redis
 django-admin-honeypot<2
 django-probes
+sentry-sdk==1.1.0
 
 # installed by alpine-packages
 # psycopg2-binary
