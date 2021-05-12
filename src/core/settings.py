@@ -11,7 +11,9 @@ env.read_envfile(BASE_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default='')
+
+# localhost - for docker healthcheck not to fire ALLOWED_HOSTS error
+ALLOWED_HOSTS = ['127.0.0.1'] + env.list('ALLOWED_HOSTS', default=[])
 
 WSGI_APPLICATION = 'wsgi.application'
 
