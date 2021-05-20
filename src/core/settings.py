@@ -28,12 +28,14 @@ INSTALLED_APPS = [
     'constance',
     'constance.backends.database',
     'admin_honeypot',
+    'debug_toolbar',
 
     'core',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -44,6 +46,7 @@ MIDDLEWARE = [
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 ADMIN_HONEYPOT_EMAIL_ADMINS = False
+INTERNAL_IPS = ['127.0.0.1']  # django-debug-toolbar
 
 ROOT_URLCONF = 'core.urls'
 STATIC_URL = '/static/'
