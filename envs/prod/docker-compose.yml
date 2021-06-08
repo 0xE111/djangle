@@ -40,7 +40,7 @@ services:
     env_file: .env
     environment:
       - DEBUG=off
-    command: celery -A core worker -l INFO --concurrency=4
+    command: celery -A core worker -l INFO --pidfile= --concurrency=4
     links:
       - redis:redis
     depends_on:
