@@ -14,9 +14,7 @@ DEBUG = env.bool('DEBUG', default=False)
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK' : lambda _: DEBUG,
 }
-
-# localhost - for docker healthcheck not to fire ALLOWED_HOSTS error
-ALLOWED_HOSTS = ['127.0.0.1'] + env.list('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = ['*']
 
 WSGI_APPLICATION = 'wsgi.application'
 
@@ -30,7 +28,6 @@ INSTALLED_APPS = [
 
     'constance',
     'constance.backends.database',
-    'admin_honeypot',
     'debug_toolbar',
 
     'core',
@@ -98,6 +95,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+]
+AUTH_USER_MODEL = 'core.User'
+AUTHENTICATION_BACKENDS = [
+    'core.auth_backends.EmailPasswordBackend',
+    'core.auth_backends.EmailAsUsernamePasswordBackend',
 ]
 
 LANGUAGE_CODE = 'en-us'

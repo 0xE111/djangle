@@ -1,6 +1,6 @@
 wheel
 envparse==0.2.0
-django<4
+django~=4.0
 jinja2
 django-constance[database]==2.8.0
 requests<=3
@@ -9,7 +9,6 @@ tenacity==6.3.1
 celery<5  # bc of flower
 flower
 redis
-django-admin-honeypot<2
 django-probes
 sentry-sdk==1.1.0
 
