@@ -9,4 +9,4 @@ pip install --upgrade pip
 pip install -r requirements.txt -r envs/local/requirements.txt
 
 ln -s envs/local/docker-compose.yml
-cp envs/local/.env .env
+cp envs/local/.envrc .envrc
