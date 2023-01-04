@@ -1,5 +1,0 @@
-libxslt-dev
-py3-psycopg2
-py3-pandas
-py3-cffi
-py3-argon2-cffi

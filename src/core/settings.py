@@ -7,12 +7,12 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-env.read_envfile(BASE_DIR / '.env')
+# env.read_envfile(BASE_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK' : lambda _: DEBUG,
+    'SHOW_TOOLBAR_CALLBACK': lambda _: DEBUG,
 }
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,10 +50,13 @@ ADMIN_HONEYPOT_EMAIL_ADMINS = False
 INTERNAL_IPS = ['127.0.0.1']  # django-debug-toolbar
 
 ROOT_URLCONF = 'core.urls'
+
+STORAGE_PATH = env('STORAGE_DIR', default=BASE_DIR.parent / 'data')
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = env('STATIC_ROOT', default=STORAGE_PATH / 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = env('MEDIA_ROOT', default=STORAGE_PATH / 'media')
 
 TEMPLATES = [
     {
@@ -84,7 +88,7 @@ DATABASES = {
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('POSTGRES_HOST', default='localhost'),
         'PORT': env.int('POSTGRES_PORT', default=5432),
-        'ATOMIC_REQUESTS': True,
+        'ATOMIC_REQUESTS': False,
     },
 }
 

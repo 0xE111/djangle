@@ -78,6 +78,19 @@ git config receive.denyCurrentBranch updateInstead
 
 ...
 
+```sh
+# on server
+nano .git/hooks/post-receive
+
+# ---
+#!/bin/sh -eux
+cd /root/project
+sh bin/deploy.sh
+# ---
+
+chmod +x .git/hooks/post-receive
+```
+
 ### Pull updates
 
 ### Deploy
@@ -88,4 +101,9 @@ git config receive.denyCurrentBranch updateInstead
 
 ```sh
 bin/django-manage.sh command \"arg with space\"
+```
+
+
+```
+git config receive.denyCurrentBranch updateInstead
 ```
