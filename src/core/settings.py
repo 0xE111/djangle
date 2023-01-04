@@ -46,6 +46,8 @@ MIDDLEWARE = [
 ]
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_SUPERUSER_ONLY = False
+CONSTANCE_CONFIG = {}
 ADMIN_HONEYPOT_EMAIL_ADMINS = False
 INTERNAL_IPS = ['127.0.0.1']  # django-debug-toolbar
 
