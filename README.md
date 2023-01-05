@@ -92,7 +92,14 @@ chmod +x .git/hooks/post-receive
 
 ### Pull updates
 
+```sh
+git fetch djangle
+git merge djangle/template
+```
+
 ### Deploy
+
+> Change all values in `.envrc` carefully on production server.
 
 ### Update
 
@@ -101,3 +108,7 @@ chmod +x .git/hooks/post-receive
 ```sh
 bin/django-manage.sh command \"arg with space\"
 ```
+
+### Test
+
+* nox

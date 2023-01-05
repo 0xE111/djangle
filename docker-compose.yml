@@ -1,0 +1,116 @@
+version: '3.7'
+
+services:
+
+  redis:
+    image: redis:6-alpine
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: redis-cli ping
+    ports:
+      - 127.0.0.1:6379:6379
+    volumes:
+      - redis:/data
+    networks:
+      - default
+    restart: on-failure
+
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - default
+    restart: on-failure
+
+  app:
+    build: .
+    image: app
+    env_file: .envrc
+    environment:
+      - POSTGRES_HOST=postgres
+    volumes:
+      - static:${STATIC_ROOT}
+      - media:${MEDIA_ROOT}
+    ports:
+      - 8000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.default.rule=Host(`domain.tld`)"
+      - "traefik.http.services.default.loadbalancer.server.port=8000"
+      - "traefik.http.routers.default.entrypoints=websecure"
+      - "traefik.http.routers.default.tls=true"
+      - "traefik.http.routers.default.tls.certresolver=certresolver"
+      - "traefik.http.routers.default.tls.domains[0].main=hobby4me.ru"
+      - "traefik.http.routers.default.middlewares=nginxheader"
+      - "traefik.http.middlewares.nginxheader.headers.customResponseHeaders.Server=nginx/1.4.1"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - default
+      - traefik
+    restart: on-failure
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx:/etc/nginx/templates
+      - media:/var/media
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.default-media.rule=Host(`domain.tld`) && PathPrefix(`/media/`)"
+      - "traefik.http.services.default-media.loadbalancer.server.port=80"
+      - "traefik.http.routers.default-media.entrypoints=websecure"
+      - "traefik.http.routers.default-media.tls=true"
+    ports:
+      - 80
+    networks:
+      - traefik
+    restart: on-failure
+
+  celery-worker:
+    image: app
+    env_file: .envrc
+    environment:
+      - DEBUG=off
+    command: celery -A core worker -l INFO --pidfile= --concurrency=4
+    links:
+      - redis:redis
+    depends_on:
+      - redis
+    networks:
+    - default
+
+  celery-beat:
+    image: app
+    env_file: .envrc
+    environment:
+      - DEBUG=off
+    command: celery -A core beat -l INFO --schedule /tmp/celerybeat-schedule -f /tmp/logs/celery-beat.log
+    volumes:
+      - logs:/tmp/logs
+    links:
+      - redis:redis
+    depends_on:
+      - redis
+      - celery-worker
+    networks:
+      - default
+    restart: on-failure
+
+volumes:
+  redis:
+  postgres:
+  static:
+  media:
+  logs:
+
+networks:
+  default:
+  traefik:
+    external: true
