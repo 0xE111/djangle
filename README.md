@@ -36,20 +36,19 @@ Now you have a `djangle/template` branch which contains latest `djangle` configu
 git merge djangle/template
 ```
 
-Almost done! Now you can run a simple script for local development setup - it will
-1) create a python virtual environment in `venv` folder and install dependencies,
-2) create a symlink to `docker-compose.yml` configuration file in root folder,
-3) copy sample `.env` file to root folder.
+Almost done! Now you can setup python venv for local development:
 
 ```sh
-bin/setup-local.sh
+python -m venv venv
+source venv/bin/activate
+pip install --upgrade pip -r requirements.txt
 ```
 
 Now you should be able to start development. Launch containers in foreground:
 
 ```sh
 # run from project root folder; may require sudo
-docker-compose up
+docker-compose up redis postgres
 ```
 
 Switch to another terminal, activate venv and run dev Django server:
@@ -101,9 +100,4 @@ chmod +x .git/hooks/post-receive
 
 ```sh
 bin/django-manage.sh command \"arg with space\"
-```
-
-
-```
-git config receive.denyCurrentBranch updateInstead
 ```
