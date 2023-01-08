@@ -1,12 +1,12 @@
 from constance import config
 from django.conf import settings
 from django.middleware.csrf import get_token
+from django.templatetags.static import static
 from django.urls import reverse
 from django.utils import translation
 from django.utils.timezone import now
-from utils.static import static
-
 from jinja2 import Environment
+
 
 context = {
     'globals': {

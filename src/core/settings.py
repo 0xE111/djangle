@@ -56,7 +56,7 @@ ROOT_URLCONF = 'core.urls'
 STORAGE_PATH = env('STORAGE_DIR', default=BASE_DIR.parent / 'data')
 STATIC_URL = '/static/'
 STATIC_ROOT = env('STATIC_ROOT', default=STORAGE_PATH / 'static')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = env('MEDIA_ROOT', default=STORAGE_PATH / 'media')
 
