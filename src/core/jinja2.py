@@ -6,7 +6,9 @@ from django.urls import reverse
 from django.utils import translation
 from django.utils.timezone import now
 from jinja2 import Environment
+from markdown import markdown
 
+from utils.forms import add_attr
 
 context = {
     'globals': {
@@ -20,6 +22,9 @@ context = {
         'now': now,
     },
     'filters': {
+        'attr': add_attr,
+        'date': lambda date, format: date.strftime(format),
+        'md': lambda text: markdown(text),  # TODO: better protection
     },
 }
 
