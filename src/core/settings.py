@@ -53,6 +53,7 @@ INTERNAL_IPS = ['127.0.0.1']  # django-debug-toolbar
 
 ROOT_URLCONF = 'core.urls'
 
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 STORAGE_PATH = env('STORAGE_DIR', default=BASE_DIR.parent / 'data')
 STATIC_URL = '/static/'
 STATIC_ROOT = env('STATIC_ROOT', default=STORAGE_PATH / 'static')
