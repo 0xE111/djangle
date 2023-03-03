@@ -115,6 +115,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+NOTIFICATIONS_URL = env('NOTIFICATIONS_URL', default='')
+
 CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='')
 CELERY_RESULT_BACKEND = env('CELERY_BROKER_URL', default='')
 CELERY_RESULT_EXPIRES = int(timedelta(days=7).total_seconds())
