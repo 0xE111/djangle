@@ -5,6 +5,7 @@ cryptography==39.0.0
 django-constance[database]==2.9.1
 django-debug-toolbar==3.8.1
 django-probes==1.7.0
+django-robots==5.0
 django~=4.1.0
 envparse==0.2.0
 ipdb==0.13.11
