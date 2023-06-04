@@ -44,8 +44,11 @@ services:
       - "traefik.http.routers.${PROJECT_NAME}.tls=true"
       - "traefik.http.routers.${PROJECT_NAME}.tls.certresolver=certresolver"
       - "traefik.http.routers.${PROJECT_NAME}.tls.domains[0].main=domain.tld"
-      - "traefik.http.routers.${PROJECT_NAME}.middlewares=nginxheader"
+      - "traefik.http.routers.${PROJECT_NAME}.middlewares=nginxheader,compress,ratelimit"
       - "traefik.http.middlewares.nginxheader.headers.customResponseHeaders.Server=nginx/1.4.1"
+      - "traefik.http.middlewares.compress.compress=true"
+      - "traefik.http.middlewares.ratelimit.ratelimit.average=100"
+      - "traefik.http.middlewares.ratelimit.ratelimit.burst=50"
     depends_on:
       - redis
       - postgres
