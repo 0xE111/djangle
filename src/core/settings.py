@@ -16,7 +16,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 ALLOWED_HOSTS = ['*']
 
-ADMINS = [(email, email) for email in env.list('ADMINGS')]
+ADMINS = [(email, email) for email in env.list('ADMINS')]
 MANAGERS = [(email, email) for email in env.list('MANAGERS')]
 
 WSGI_APPLICATION = 'wsgi.application'

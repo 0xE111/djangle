@@ -16,8 +16,8 @@ export EMAIL_FILE_PATH=/tmp/email
 export EMAIL_USE_TLS=1
 export EMAIL_HOST=
 export EMAIL_PORT=
-export EMAIL_HOST_USER=
-export EMAIL_HOST_PASSWORD=
+export EMAIL_USER=
+export EMAIL_PASSWORD=
 
 export STATIC_ROOT=/home/user/workspace/djangle/data/static
 export MEDIA_ROOT=/home/user/workspace/djangle/data/media
