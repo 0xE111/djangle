@@ -3,6 +3,9 @@ export DEBUG=1
 export SECRET_KEY=12345
 export PROJECT_NAME=
 
+export ADMINS=
+export MANAGERS=
+
 export POSTGRES_HOST=localhost
 export POSTGRES_PORT=5432
 export POSTGRES_PASSWORD=12345
