@@ -138,20 +138,6 @@ USE_TZ = True
 
 NOTIFICATIONS_URL = env('NOTIFICATIONS_URL', default='')
 
-CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='')
-CELERY_RESULT_BACKEND = env('CELERY_BROKER_URL', default='')
-CELERY_RESULT_EXPIRES = int(timedelta(days=7).total_seconds())
-CELERY_SEND_EVENTS = True
-CELERY_BEAT_SCHEDULE = {
-    # 'task_name': {
-    #     'task': 'path.to.task',
-    #     'schedule': 60 * 60,  # every hour
-    # },
-}
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-
 SENTRY_DSN = env('SENTRY_DSN', default=None)
 if SENTRY_DSN:
     sentry_sdk.init(

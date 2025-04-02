@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   redis:
-    image: redis:6-alpine
+    image: redis:alpine
     command: redis-server --appendonly yes
     healthcheck:
       test: redis-cli ping
@@ -11,6 +11,16 @@ services:
       - 127.0.0.1:6379:6379
     volumes:
       - redis:/data
+    networks:
+      - default
+    restart: on-failure
+
+  nats:
+    image: nats:alpine
+    ports:
+      - 127.0.0.1:4222:4222
+    volumes:
+      - nats:/data
     networks:
       - default
     restart: on-failure
@@ -74,38 +84,9 @@ services:
       - traefik
     restart: on-failure
 
-  celery-worker:
-    image: ${PROJECT_NAME}_app
-    env_file: .env
-    environment:
-      - DEBUG=off
-    command: celery -A core worker -l INFO --pidfile= --concurrency=4
-    links:
-      - redis:redis
-    depends_on:
-      - redis
-    networks:
-    - default
-
-  celery-beat:
-    image: ${PROJECT_NAME}_app
-    env_file: .env
-    environment:
-      - DEBUG=off
-    command: celery -A core beat -l INFO --schedule /tmp/celerybeat-schedule -f /tmp/logs/celery-beat.log
-    volumes:
-      - logs:/tmp/logs
-    links:
-      - redis:redis
-    depends_on:
-      - redis
-      - celery-worker
-    networks:
-      - default
-    restart: on-failure
-
 volumes:
   redis:
+  nats:
   postgres:
   static:
   media:

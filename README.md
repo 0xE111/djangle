@@ -8,7 +8,7 @@
 
 # Cheatsheet
 
-Djangle is a template which simplifies development & deployment of django apps. It's based on docker & docker-compose.
+Djangle is a template which simplifies development & deployment of django apps. It's based on docker & docker compose.
 
 ## Start new project locally
 
@@ -26,7 +26,7 @@ git config user.email "your email"
 Then, set up `djangle` as one of remotes, and pull latest version. This will create a branch named `djangle/template` which is a skeleton for any new project:
 
 ```sh
-git remote add djangle git@github.com:c0ntribut0r/djangle.git
+git remote add djangle git@github.com:0xE111/djangle.git
 git fetch --all
 ```
 
@@ -36,27 +36,24 @@ Now you have a `djangle/template` branch which contains latest `djangle` configu
 git merge djangle/template
 ```
 
-Almost done! Now you can setup python venv for local development:
+Almost done! Install dependencies:
 
 ```sh
-python -m venv venv
-source venv/bin/activate
-pip install --upgrade pip -r requirements.txt
+uv sync
 ```
 
 Now you should be able to start development. Launch containers in foreground:
 
 ```sh
 # run from project root folder; may require sudo
-docker-compose up redis postgres
+docker-compose up redis nats postgres
 ```
 
-Switch to another terminal, activate venv and run dev Django server:
+Switch to another terminal and run dev Django server:
 
 ```sh
-source venv/bin/activate
-src/manage.py migrate
-src/manage.py runserver
+uv run src/manage.py migrate
+uv run src/manage.py runserver
 ```
 
 Visit http://127.0.0.1:8000 and ensure that you may see greetings page.

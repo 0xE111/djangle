@@ -1,25 +1,5 @@
-#!/bin/sh
-export DEBUG=1
-export SECRET_KEY=12345
-export PROJECT_NAME=
-
-export ADMINS=
-export MANAGERS=
-
-export POSTGRES_HOST=localhost
-export POSTGRES_PORT=5432
-export POSTGRES_PASSWORD=12345
-
-export EMAIL=email@localhost
-export EMAIL_BACKEND=django.core.mail.backends.filebased.EmailBackend
-export EMAIL_FILE_PATH=/tmp/email
-export EMAIL_USE_TLS=1
-export EMAIL_HOST=
-export EMAIL_PORT=
-export EMAIL_USER=
-export EMAIL_PASSWORD=
-
-export STATIC_ROOT=/home/user/workspace/djangle/data/static
-export MEDIA_ROOT=/home/user/workspace/djangle/data/media
-
-export CELERY_BROKER_URL=redis://localhost:6379/0
+#!/bin/bash
+dotenv
+export PYENV_VERSION="3.13.1"
+export PYTHONBREAKPOINT="ipdb.set_trace"
+# export GIT_SSH_COMMAND="ssh -i ~/.ssh/keys/id_rsa"

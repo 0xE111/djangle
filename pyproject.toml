@@ -1,0 +1,45 @@
+[project]
+name = "project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13.1"
+dependencies = [
+    "anyapi2>=0.0.6",
+    "django>=5.1.7",
+    "django-constance>=4.3.2",
+    "django-probes>=1.7.0",
+    "django-robots>=6.1",
+    "envparse>=0.2.0",
+    "faststream[cli,nats]>=0.5.37",
+    "jinja2>=3.1.6",
+    "markdown>=3.7",
+    "more-itertools>=10.6.0",
+    "psycopg>=3.2.6",
+    "psycopg-binary>=3.2.6",
+    "pydantic>=2.11.1",
+    "redis>=5.2.1",
+    "sentry-sdk>=2.25.0",
+    "whitenoise[brotli]>=6.9.0",
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar>=5.1.0",
+    "ipdb>=0.13.13",
+]
+test = [
+    'pytest',
+    'pytest-django',
+    'pytest-xdist',
+    'pytest-asyncio',
+    'freezegun',
+]
+type_check = [
+    "django-stubs[compatible-mypy]",
+    "djangorestframework-stubs[compatible-mypy]",
+    "mypy",
+    "types-freezegun",
+    "types-python-dateutil",
+    "types-requests",
+]
